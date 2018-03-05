@@ -11,16 +11,15 @@ Before trying out any other libraries I wanted to actually test if the display w
 
 I used the following pin-out:
 
-E-ink     |  Huzzah
--------------------
-GND       |  GND
-3.3V      |  3V
-BUSY      |  Pin 4
-RST       |  Pin 2
-DC        |  Pin 5
-CS        |  Pin 15
-CLK       |  SCK
-DIN       |  MOSI
+E-ink -> Huzzah
+GND   ->  GND
+3.3V  ->  3V
+BUSY  ->  Pin 4
+RST   ->  Pin 2
+DC    ->  Pin 5
+CS    ->  Pin 15
+CLK   ->  SCK
+DIN   ->  MOSI
 
 To use this pin configuration please make sure that the pins are defined as following in the **epdif.h**:
 
