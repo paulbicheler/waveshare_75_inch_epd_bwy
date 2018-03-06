@@ -1,35 +1,42 @@
 # Demo for waveshare 7.5 inch tri color display.
 
+## Introduction
 This demo code for [this display](https://www.waveshare.com/7.5inch-e-paper-hat-c.htm) was downloaded from [their wiki](https://www.waveshare.com/wiki/File:7.5inch_e-paper_hat_b_code.7z).
 Unlike what you might expect from a Chinese reseller, Waveshare seems to have recognized the utility in providing usable documentation. Providing a link in the actual box would the cherry on top of the e-ink cake. Talking about e-ink, this type of display is also called *electronic paper display* hence the the acronmy epd you will encounter when reading the code.
 
 This particular display is actually sourced from [Good Display]() and goes by the name of GDEW075C21. It is a 7.5 inch 600x384 pixel display which can display three colors: Black, White and Yellow (bwy). It is similar to the more common Black, White and Red (bwr) and works exactly the same except that it shows yellow instead of Red.
 
-# Adafruit Huzzah ESP 8266 + 7.5 e-ink
-
 Before trying out any other libraries I wanted to actually test if the display worked. The code was downloaded on (04.03.2018) and slightly modified to compile/run on the [Adafruit Huzzah](https://learn.adafruit.com/adafruit-feather-huzzah-esp8266)
 
-I used the following pin-out:
 
-E-ink -> Huzzah
+## ## Instructions
 
-GND   ->  GND
+* Download the Arduino IDE [from here]() This code was tested with version 1.8.5
+* Follow the [Adafruit guide]() to setup the Feather Huzzah 8266 with the Arduino IDE
+* Download zip or clone this repository o your local computer
+    - If you downloaded the zip, unzip it
+* Open the Arduino IDE and find out your Sketchbook folder
+    - You can find your Sketchbook Location under File -> Preferences -> Sketchbook Location
+    - Set the location to the downloaded/cloned folder.
+    - Restart the Arduino IDE
+* Open the demo sketch using File -> Sketchbook -> waveshare_75_inch_epd_bwy
+* Make sure that the Board is set to Adafruit HUZZAH Esp 8266 
+    - Setting the board is done under Tools -> Board
+* Compile
+* Connection the display breakout board to the Feather using the following pinout:
+    - E-ink -> Huzzah
+    - GND   -> GND
+    - 3.3V  -> 3V
+    - BUSY  -> Pin 4
+    - RST   -> Pin 2
+    - DC    -> Pin 5
+    - CS    -> Pin 15
+    - CLK   -> SCK
+    - DIN   -> MOSI
+* Upload the sketch.
 
-3.3V  ->  3V
 
-BUSY  ->  Pin 4
-
-RST   ->  Pin 2
-
-DC    ->  Pin 5
-
-CS    ->  Pin 15
-
-CLK   ->  SCK
-
-DIN   ->  MOSI
-
-To use this pin configuration please make sure that the pins are defined as following in the **epdif.h**:
+If you want to change the pins you also need to change the pin configuration in the code by changing the file **epdif.h**:
 
 ```
 #define RST_PIN         2
@@ -42,6 +49,8 @@ To use this pin configuration please make sure that the pins are defined as foll
 Now it should display the following picture after flickering for some time. Refresh rate is rated at 31s. As far as I can tell it is normal that the yellow will appear last.
 
 ![Display](/res/display.png?raw=true "Adafruit Huzzah 8266 + 7.5 e-ink")
+
+The display method is done in the setup method which means that if you want to rerun it you have to reset the board by pressing the Reset button.
 
 # Links
 
