@@ -60,17 +60,23 @@ Similar to the Waveshare samples you need to download / clone the repository and
 
 After you restart the Arduino IDE you see the library in Sketch -> Include Libraries -> Manage Libraries. 
 
-I got the [GxEPD_SPI_TestExample](https://github.com/ZinggJM/GxEPD/tree/master/examples/GxEPD_SPI_TestExample) working with my Adafruit Huzzah Esp8266 using the following pin configuration in the `#if defined(ESP8266)` block:
+I got the [GxEPD_SPI_TestExample](https://github.com/ZinggJM/GxEPD/tree/master/examples/GxEPD_SPI_TestExample) working with my Adafruit Huzzah Esp8266:
 
-```
-static const uint8_t E_DC   = 5;
-static const uint8_t E_BUSY = 4;
-static const uint8_t E_RST  = 2;
+* In the 52 to 63 you need to comment every line except the one that matches your electronic paper display
 
-// GxIO_SPI(SPIClass& spi, int8_t cs, int8_t dc, int8_t rst = -1, int8_t bl = -1);
-GxIO_Class io(SPI, SS, E_DC, E_RST); // arbitrary selection of D3(=0), D4(=2), selected for default of GxEPD_Class
-// GxGDEP015OC1(GxIO& io, uint8_t rst = 2, uint8_t busy = 4);
-GxEPD_Class display(io, E_RST, E_BUSY); // default selection of D4(=2), D2(=4)
-```
+ `#include <GxGDEW075Z09/GxGDEW075Z09.cpp>    // 7.5" b/w/r`
+
+* In the `#if defined(ESP8266)` block you need to change the following lines
+
+    ```
+    static const uint8_t E_DC   = 5;
+    static const uint8_t E_BUSY = 4;
+    static const uint8_t E_RST  = 2;
+
+    // GxIO_SPI(SPIClass& spi, int8_t cs, int8_t dc, int8_t rst = -1, int8_t bl = -1);
+    GxIO_Class io(SPI, SS, E_DC, E_RST); // arbitrary selection of D3(=0), D4(=2), selected for default of GxEPD_Class
+    // GxGDEP015OC1(GxIO& io, uint8_t rst = 2, uint8_t busy = 4);
+    GxEPD_Class display(io, E_RST, E_BUSY); // default selection of D4(=2), D2(=4)
+    ```
 
 The display connections remain the same as before.
