@@ -52,6 +52,25 @@ Now it should display the following picture after flickering for some time. Refr
 
 The display method is done in the setup method which means that if you want to rerun it you have to reset the board by pressing the Reset button.
 
-# Links
+# Further Reading
 
-* https://github.com/ZinggJM/GxEPD/ Based off the Adafruit GFx library this seems to be well maintained and the project is active with the author replying in the [arduino forum](http://forum.arduino.cc/index.php?topic=487007.0)
+ased off the Adafruit GFX library the [gxEPD library](https://github.com/ZinggJM/GxEPD) seems to be well maintained and the project is active with the author replying in the [arduino forum](http://forum.arduino.cc/index.php?topic=487007.0).
+
+Similar to the Waveshare samples you need to download / clone the repository and put it in the libraries folder of your Arduino folder or the Sketchbook folder. The name of the library in the IDE will be the same as the folder!
+
+After you restart the Arduino IDE you see the library in Sketch -> Include Libraries -> Manage Libraries. 
+
+I got the [GxEPD_SPI_TestExample](https://github.com/ZinggJM/GxEPD/tree/master/examples/GxEPD_SPI_TestExample) working with my Adafruit Huzzah Esp8266 using the following pin configuration in the `#if defined(ESP8266)` block:
+
+```
+static const uint8_t E_DC   = 5;
+static const uint8_t E_BUSY = 4;
+static const uint8_t E_RST  = 2;
+
+// GxIO_SPI(SPIClass& spi, int8_t cs, int8_t dc, int8_t rst = -1, int8_t bl = -1);
+GxIO_Class io(SPI, SS, E_DC, E_RST); // arbitrary selection of D3(=0), D4(=2), selected for default of GxEPD_Class
+// GxGDEP015OC1(GxIO& io, uint8_t rst = 2, uint8_t busy = 4);
+GxEPD_Class display(io, E_RST, E_BUSY); // default selection of D4(=2), D2(=4)
+```
+
+The display connections remain the same as before.
